@@ -1,8 +1,7 @@
 //Load Packages
-var bcrypt = require('bcrypt-nodejs');
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
-
+const bcrypt = require('bcrypt-nodejs');
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
 //user Schema by mongoose
 var UserSchema = new Schema({
@@ -46,4 +45,4 @@ UserSchema.methods.comparePassword = function(password){
 };
 
 //return the model
-module.exports = mongoose.model('User',UserSchema);
+module.exports = mongoose.model('User', UserSchema);

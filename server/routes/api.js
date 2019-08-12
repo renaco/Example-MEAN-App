@@ -30,7 +30,7 @@ apiRouter.use("/",function(req,res,next){
 			}else{
 				//save to request for use in other routes
 				req.decoded = decoded;
-				next();// this make sure we go to the next routes and dont stop here
+				next();// this make sure we go to the next routes and don't stop here
 			}
 		});
 	}else{

@@ -2,16 +2,15 @@
 
 //==================================--BASE SETUP--============================
 //LOAD PACKAGES-------------------------------
-var express = require ('express'); //EXPRESS Package
-var app = express();	//define our app using express
-var bodyParser = require('body-parser');// get body-parser
-var morgan = require('morgan'); //use to see requests
-var mongoose = require('mongoose') //for working with mongoDB
-var config = require('./config'); //get config file
-var path = require('path');
-var jwt = require('jsonwebtoken');
-var User = require(__dirname + '/server//models/user.js');
-
+const express = require ('express'); //EXPRESS Package
+const app = express();	//define our app using express
+const bodyParser = require('body-parser');// get body-parser
+const morgan = require('morgan'); //use to see requests
+const mongoose = require('mongoose') //for working with mongoDB
+const config = require('./config'); //get config file
+const path = require('path');
+const jwt = require('jsonwebtoken');
+const User = require(__dirname + '/server//models/user.js');
 
 app.use(morgan('dev')); //HTTP logger
 
@@ -19,19 +18,19 @@ app.use(morgan('dev')); //HTTP logger
 var superSecret = config.secret;
 // APP CONFIGURATION------------------------------------------
 // use body parser to grab information from POST
-app.use(bodyParser.urlencoded({ extended:true}));
+app.use(bodyParser.urlencoded({ extended:true }));
 app.use(bodyParser.json());
 
 // configure app to handle CORS requests
 app.use(function(req,res,next){
-	res.setHeader('Access-Control-Allow-Orgin','*');
+	res.setHeader('Access-Control-Allow-Origin','*');
 	res.setHeader('Access-Control-Allow-Method','GET,POST');
 	res.setHeader('Access-Control-Allow-Headers','X-Request-With,content-type,\Authorization');
 	next();
 });
 
 //==================================--DB--====================================
-mongoose.connect('mongodb://app:myPassword@localhost/appDB');
+mongoose.connect('mongodb://localhost:27017/appDB');
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function (callback) {
@@ -71,7 +70,7 @@ app.post('/authenticate',function(req, res){
 		if(!user){
 			res.json({
 				success:false,
-				message:'Authencation failed. User not found.'
+				message:'Authentication failed. User not found.'
 			});
 		}else if (user){
 			//check if password matches
@@ -79,7 +78,7 @@ app.post('/authenticate',function(req, res){
 			if(!validPassword){
 				res.json({
 					success: false,
-					message: 'Authencation failed. Wrong password.'
+					message: 'Authentication failed. Wrong password.'
 				});
 			}else{
 				//if user is found and password is right

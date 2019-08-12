@@ -7,6 +7,6 @@ angular.module('userApp', [
 	'userCtrl'
 	])
 .config(function($httpProvider)	{	
-	//attach our auth inteceptor to the http requests
+	//attach our auth interceptor to the http requests
 	$httpProvider.interceptors.push('AuthInterceptor');
 });
